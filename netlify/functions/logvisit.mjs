@@ -1,7 +1,6 @@
 // netlify/functions/logVisit.mjs
-import { getStore } from '@netlify/blobs';
+import { getStore, connectLambda } from '@netlify/blobs';
 import { lookupGeo } from './utils/geo.mjs';
-import { connectLambda, getStore } from '@netlify/blobs';
 
 export async function handler(event) {
   try {
