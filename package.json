@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "googleapis": "^159.0.0",
+    "netlify-cli": "^23.4.2"
+  }
+}
