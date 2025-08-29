@@ -1,26 +1,17 @@
-// netlify/functions/logVisit.mjs
-import { getStore, connectLambda } from '@netlify/blobs';
-import { lookupGeo } from './utils/geo.mjs';
+import { store } from './blobs-store.mjs';
 
-export async function handler(event) {
+export async function logVisit(ip, userAgent) {
+  const timestamp = new Date().toISOString();
+  const logEntry = {
+    ip,
+    userAgent,
+    timestamp
+  };
+
   try {
-    connectLambda(event); // 👈 Injects siteID, token, etc.
-
-    const store = getStore('visit-logs');
-    await store.set(Date.now().toString(), JSON.stringify({
-      page: 'home',
-      timestamp: new Date().toISOString()
-    }));
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ success: true })
-    };
-  } catch (error) {
-    console.error('Blob write error:', error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'Blob write failed' })
-    };
+    await store.set(timestamp, JSON.stringify(logEntry));
+    console.log(`✅ Visit logged at ${timestamp}`);
+  } catch (err) {
+    console.error('❌ Failed to log visit:', err.message);
   }
 }

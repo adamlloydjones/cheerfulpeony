@@ -5,7 +5,7 @@ const payload = {
   timestamp: new Date().toISOString()
 };
 
-fetch('/.netlify/functions/logvisit', {
+fetch('/.netlify/functions/blob-storage', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify(payload)
