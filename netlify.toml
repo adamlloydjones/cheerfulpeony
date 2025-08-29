@@ -1,2 +1,9 @@
 [functions]
   directory = "netlify/functions"
+
+[build]
+  command = "hugo"
+  publish = "public"
+
+[context.production.environment]
+  HUGO_VERSION = "0.149.0"
