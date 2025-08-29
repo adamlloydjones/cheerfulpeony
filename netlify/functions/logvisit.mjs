@@ -1,31 +1,27 @@
 // netlify/functions/logVisit.mjs
 import { getStore } from '@netlify/blobs';
 import { lookupGeo } from './utils/geo.mjs';
+import { connectLambda, getStore } from '@netlify/blobs';
 
 export async function handler(event) {
-  const body = JSON.parse(event.body || '{}');
-  const ip =
-    event.headers['x-nf-client-connection-ip'] ||
-    event.headers['client-ip'] ||
-    event.headers['x-forwarded-for']?.split(',')[0] ||
-    '';
+  try {
+    connectLambda(event); // 👈 Injects siteID, token, etc.
 
-  const geo = await lookupGeo(ip);
-  const store = getStore('visitor-logs');
-  const key = `visit-${Date.now()}`;
+    const store = getStore('visit-logs');
+    await store.set(Date.now().toString(), JSON.stringify({
+      page: 'home',
+      timestamp: new Date().toISOString()
+    }));
 
-  const data = {
-    timestamp: new Date().toISOString(),
-    url: body.url || '',
-    referrer: body.referrer || '',
-    geo,
-    ip
-  };
-
-  await store.set(key, JSON.stringify(data));
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ success: true })
-  };
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ success: true })
+    };
+  } catch (error) {
+    console.error('Blob write error:', error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Blob write failed' })
+    };
+  }
 }
