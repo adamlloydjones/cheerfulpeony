@@ -36,7 +36,7 @@ exports.handler = async function (event) {
   const sheets = google.sheets({ version: 'v4', auth });
 
   const spreadsheetId = process.env.GOOGLE_SHEET_ID;
-  const range = 'Sheet1!A1:C1';
+  const range = 'Sheet1!A1:Z1';
 
   try {
     await sheets.spreadsheets.values.append({
