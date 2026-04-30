@@ -1,17 +1,14 @@
 {
-  "name": "scheduler-app",
+  "name": "pinterest-scheduler-netlify",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "netlify dev",
+    "build": "echo \"No build step\"",
+    "start": "netlify dev"
   },
   "dependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
-  },
-  "devDependencies": {
-    "vite": "^5.0.0"
+    "pg": "^8.11.5"
   }
 }
+
