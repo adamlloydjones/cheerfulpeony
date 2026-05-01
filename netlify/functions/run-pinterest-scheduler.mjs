@@ -1,5 +1,6 @@
 // netlify/functions/run-pinterest-scheduler.mjs
 import { query } from './db.mjs';
+import { withAuth } from './_auth.js';
 
 const PINS_URL = 'https://api.pinterest.com/v5/pins';
 const TOKEN_URL = 'https://api.pinterest.com/v5/oauth/token';

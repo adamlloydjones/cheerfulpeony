@@ -1,5 +1,6 @@
 // netlify/functions/list-scheduled-posts.mjs
 import { query } from './db.mjs';
+import { withAuth } from './_auth.js';
 
 export default async (request) => {
   const url = new URL(request.url);

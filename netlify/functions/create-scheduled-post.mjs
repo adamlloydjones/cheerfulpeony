@@ -1,5 +1,6 @@
 // netlify/functions/create-scheduled-post.mjs
 import { query } from './db.mjs';
+import { withAuth } from './_auth.js';
 
 export default async (request) => {
   if (request.method !== 'POST') {
@@ -41,3 +42,4 @@ export default async (request) => {
 
   return Response.json({ scheduled_post: insertRes.rows[0] });
 };
+

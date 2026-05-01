@@ -1,5 +1,7 @@
 // netlify/functions/db.mjs
 import pkg from 'pg';
+import { withAuth } from './_auth.js';
+
 const { Pool } = pkg;
 
 const pool = new Pool({

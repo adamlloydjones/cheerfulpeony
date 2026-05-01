@@ -1,4 +1,5 @@
 // netlify/functions/pinterest-auth-start.mjs
+import { withAuth } from './_auth.js';
 
 const PINTEREST_AUTH_URL = 'https://www.pinterest.com/oauth/';
 

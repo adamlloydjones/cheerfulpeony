@@ -1,5 +1,6 @@
 // netlify/functions/pinterest-auth-callback.mjs
 import { query } from './db.mjs';
+import { withAuth } from './_auth.js';
 
 const TOKEN_URL = 'https://api.pinterest.com/v5/oauth/token';
 
